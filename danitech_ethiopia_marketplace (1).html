@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DaniTech Ethiopia | Tech Directory & P2P Marketplace</title>
+    
+    <!-- Fonts: Inter typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS with custom theme styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#FFEBEE',
+                            100: '#FFCDD2',
+                            500: '#E53935',
+                            600: '#D32F2F',
+                            700: '#C62828',
+                            800: '#B71C1C',
+                            900: '#8E0000',
+                        },
+                        neutralBg: '#F8F9FA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03)',
+                        'hover': '0 20px 30px -10px rgba(211, 47, 47, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04)',
+                        'card': '0 4px 18px 0 rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            background-color: #F8F9FA;
+            color: #1F2937;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F1F1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D32F2F;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B71C1C;
+        }
+
+        /* Image aspect ratio container for seamless loading across browsers */
+        .img-container {
+            position: relative;
+            padding-bottom: 65%;
+            overflow: hidden;
+            background-color: #F3F4F6;
+        }
+        .img-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -webkit-transition: transform 0.4s ease-in-out;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+            outline: 3px solid #D32F2F;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-neutralBg flex flex-col min-h-screen">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-[1360px] mx-auto px-6 py-4 flex items-center justify-between gap-6">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group focus:outline-none" aria-label="DaniTech Ethiopia Home">
+                <div class="w-12 h-12 bg-gradient-to-br from-brand-600 to-brand-800 rounded-2xl flex items-center justify-center text-white shadow-md transform group-hover:scale-105 transition-transform duration-200 relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px]"></div>
+                    <div class="flex items-center justify-center font-extrabold text-xl tracking-tighter">
+                        <i class="fa-solid fa-laptop-code text-lg mr-1 hidden sm:inline-block"></i>
+                        <span>DT</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-extrabold tracking-tight text-gray-900 leading-tight">
+                        DaniTech<span class="text-brand-600">.et</span>
+                    </span>
+                    <span class="text-xs text-gray-500 font-medium tracking-wide uppercase">Ethiopia Tech Directory</span>
+                </div>
+            </a>
+
+            <!-- Header Action Button -->
+            <div class="flex items-center gap-4">
+                <button onclick="togglePostModal()" class="inline-flex items-center justify-center gap-2.5 px-6 py-3 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-semibold text-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-camera text-base"></i>
+                    <span>Post Your Tech & Photo</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER SECTION -->
+    <section class="bg-gradient-to-b from-white to-neutralBg border-b border-gray-200/80 py-12 md:py-16">
+        <div class="max-w-[1360px] mx-auto px-6">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-bolt-lightning text-brand-600"></i>
+                    <span>Direct Peer-to-Peer Tech Directory in Ethiopia</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-4">
+                    Upload & Sell Tech Hardware, <span class="text-brand-600">Directly in ETB.</span>
+                </h1>
+                <p class="text-base sm:text-lg text-gray-600 leading-relaxed font-normal mb-8">
+                    Post your laptops, PCs, phones, and accessories with real photos from your phone or device. Buyers connect directly via Phone, Telegram, or WhatsApp.
+                </p>
+
+                <!-- Search Input Bar -->
+                <div class="relative max-w-2xl">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </div>
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search devices, GPUs, MacBooks, sub-cities (Bole, Kazanchis)..." class="w-full pl-12 pr-28 py-4 bg-white border border-gray-300 rounded-2xl shadow-sm focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20 text-gray-900 placeholder-gray-400 text-base transition-all">
+                    <button onclick="applyFilters()" class="absolute right-2.5 top-2.5 bottom-2.5 px-5 bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm rounded-xl transition-colors">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-[1360px] mx-auto px-6 py-10 flex-grow w-full">
+        
+        <!-- USE-CASE CATEGORIES -->
+        <section class="mb-10">
+            <div class="flex flex-col gap-3 mb-4">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-gray-500">Filter By Workstation Use-Case</h2>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-3">
+                <button onclick="setUseCaseFilter('all')" id="uc-all" class="usecase-btn active-usecase px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border flex items-center gap-2.5 bg-brand-600 text-white border-brand-600 shadow-sm">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>All Use Cases</span>
+                </button>
+
+                <button onclick="setUseCaseFilter('Gaming')" id="uc-Gaming" class="usecase-btn px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border flex items-center gap-2.5 bg-white text-gray-700 border-gray-200 hover:border-brand-500 hover:text-brand-600 shadow-sm">
+                    <i class="fa-solid fa-gamepad text-brand-600"></i>
+                    <span>Gaming Hardware</span>
+                </button>
+
+                <button onclick="setUseCaseFilter('Workspace')" id="uc-Workspace" class="usecase-btn px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border flex items-center gap-2.5 bg-white text-gray-700 border-gray-200 hover:border-brand-500 hover:text-brand-600 shadow-sm">
+                    <i class="fa-solid fa-briefcase text-brand-600"></i>
+                    <span>Workspace & Office</span>
+                </button>
+
+                <button onclick="setUseCaseFilter('Programming')" id="uc-Programming" class="usecase-btn px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border flex items-center gap-2.5 bg-white text-gray-700 border-gray-200 hover:border-brand-500 hover:text-brand-600 shadow-sm">
+                    <i class="fa-solid fa-code text-brand-600"></i>
+                    <span>Programming & Coding</span>
+                </button>
+
+                <button onclick="setUseCaseFilter('Editing')" id="uc-Editing" class="usecase-btn px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border flex items-center gap-2.5 bg-white text-gray-700 border-gray-200 hover:border-brand-500 hover:text-brand-600 shadow-sm">
+                    <i class="fa-solid fa-wand-magic-sparkles text-brand-600"></i>
+                    <span>Video & Photo Editing</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- FILTERS AND PRODUCT LISTINGS -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+            
+            <!-- LEFT SIDEBAR FILTERS -->
+            <aside class="lg:col-span-1 space-y-8 bg-white p-7 rounded-2xl border border-gray-200 shadow-soft h-fit">
+                <div>
+                    <div class="flex items-center justify-between mb-5 border-b border-gray-100 pb-3">
+                        <h3 class="font-bold text-gray-900 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-brand-600"></i>
+                            <span>Filters</span>
+                        </h3>
+                        <button onclick="resetAllFilters()" class="text-xs font-semibold text-brand-600 hover:text-brand-800 transition-colors">
+                            Reset All
+                        </button>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="space-y-4 mb-6">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500">Device Type</label>
+                        <select id="categoryFilter" onchange="applyFilters()" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm font-medium text-gray-800 focus:ring-2 focus:ring-brand-600">
+                            <option value="all">All Device Categories</option>
+                            <option value="Laptops">Laptops & PCs</option>
+                            <option value="Desktops">Desktops & Workstations</option>
+                            <option value="Phones">Smartphones & Tablets</option>
+                            <option value="Accessories">Accessories & Gear</option>
+                        </select>
+                    </div>
+
+                    <!-- Location / Sub-city -->
+                    <div class="space-y-4 mb-6">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500">Sub-city / Location</label>
+                        <select id="locationFilter" onchange="applyFilters()" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm font-medium text-gray-800 focus:ring-2 focus:ring-brand-600">
+                            <option value="all">All Locations</option>
+                            <option value="Bole">Bole, Addis Ababa</option>
+                            <option value="Kazanchis">Kazanchis, Addis Ababa</option>
+                            <option value="4 Kilo">4 Kilo, Addis Ababa</option>
+                            <option value="Mexico">Mexico, Addis Ababa</option>
+                            <option value="Sarbet">Sarbet, Addis Ababa</option>
+                            <option value="Adama">Adama</option>
+                            <option value="Hawassa">Hawassa</option>
+                            <option value="Bahir Dar">Bahir Dar</option>
+                            <option value="Dire Dawa">Dire Dawa</option>
+                        </select>
+                    </div>
+
+                    <!-- Condition Filter -->
+                    <div class="space-y-4 mb-6">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500">Condition</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 text-sm text-gray-700 cursor-pointer">
+                                <input type="checkbox" value="Brand New" onchange="applyFilters()" class="condition-checkbox rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
+                                <span>Brand New (Sealed)</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-700 cursor-pointer">
+                                <input type="checkbox" value="Slightly Used" onchange="applyFilters()" class="condition-checkbox rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
+                                <span>Slightly Used (Ethiopian Hand)</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-700 cursor-pointer">
+                                <input type="checkbox" value="Refurbished" onchange="applyFilters()" class="condition-checkbox rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
+                                <span>Refurbished</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Price Slider -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-gray-500">
+                            <span>Max Price (ETB)</span>
+                            <span id="priceDisplay" class="text-brand-600 font-extrabold text-sm">300,000 ETB</span>
+                        </div>
+                        <input type="range" id="priceRange" min="1000" max="300000" step="5000" value="300000" oninput="updatePriceLabel(); applyFilters();" class="w-full accent-brand-600 cursor-pointer">
+                    </div>
+
+                    <!-- Sorting -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500">Sort By</label>
+                        <select id="sortOrder" onchange="applyFilters()" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm font-medium text-gray-800 focus:ring-2 focus:ring-brand-600">
+                            <option value="newest">Newest First</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- RIGHT PRODUCT GRID & EMPTY STATE -->
+            <section class="lg:col-span-3 space-y-6">
+                <!-- Status Bar -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                    <p class="text-sm text-gray-600 font-medium">
+                        Active Listings: <span id="resultsCount" class="font-bold text-brand-600">0</span>
+                    </p>
+                    <div id="activeFilterBadges" class="flex flex-wrap items-center gap-2"></div>
+                </div>
+
+                <!-- Live Product Grid (Populated purely by user uploads) -->
+                <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"></div>
+
+                <!-- Clean Zero-Products Empty State -->
+                <div id="emptyState" class="text-center py-16 bg-white rounded-3xl border border-dashed border-gray-300 shadow-sm p-8 sm:p-12">
+                    <div class="w-20 h-20 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-sm">
+                        <i class="fa-solid fa-camera-retro"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-gray-900 mb-2">No Active Listings Yet</h3>
+                    <p class="text-gray-500 text-sm max-w-md mx-auto mb-8 leading-relaxed">
+                        The store starts clean! Be the first seller in Ethiopia to post a laptop, PC, phone, or accessory with photos from your device.
+                    </p>
+                    <button onclick="togglePostModal()" class="px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 inline-flex items-center gap-2.5">
+                        <i class="fa-solid fa-plus text-base"></i>
+                        <span>Post First Device Listing</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAYMENT METHODS FOOTER BANNER -->
+        <section class="mt-20 border-t border-gray-200 pt-12">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight">Accepted Ethiopian Payment Methods</h2>
+                <p class="text-gray-600 text-sm mt-2">
+                    Settle transactions directly with verified local buyers and sellers using local bank transfers and wallets.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-lg">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <span class="block font-bold text-gray-900 text-sm">Telebirr</span>
+                    <span class="text-xs text-gray-500">Ethio Telecom</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-700 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-lg">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <span class="block font-bold text-gray-900 text-sm">CBE</span>
+                    <span class="text-xs text-gray-500">Commercial Bank</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
+                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-lg">
+                        <i class="fa-solid fa-vault"></i>
+                    </div>
+                    <span class="block font-bold text-gray-900 text-sm">Awash Bank</span>
+                    <span class="text-xs text-gray-500">Awash Birr</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
+                    <div class="w-12 h-12 bg-yellow-50 text-yellow-700 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-lg">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <span class="block font-bold text-gray-900 text-sm">BOA</span>
+                    <span class="text-xs text-gray-500">Bank of Abyssinia</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-lg">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <span class="block font-bold text-gray-900 text-sm">CBE Birr</span>
+                    <span class="text-xs text-gray-500">Mobile Wallet</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
+                    <div class="w-12 h-12 bg-red-50 text-brand-600 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-lg">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                    <span class="block font-bold text-gray-900 text-sm">Dashen / Amole</span>
+                    <span class="text-xs text-gray-500">Dashen Bank</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-gray-200 my-8">
+            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-700 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- POST YOUR TECH MODAL WITH REAL IMAGE FILE UPLOAD -->
+    <div id="postModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-gray-200 my-8">
+            <button onclick="togglePostModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-700 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="mb-6">
+                <div class="inline-flex items-center gap-2 text-brand-600 font-bold text-xs uppercase tracking-wider mb-1">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Free Tech Listing
+                </div>
+                <h3 class="text-2xl font-extrabold text-gray-900">Post Your Device & Photo</h3>
+                <p class="text-gray-500 text-sm">Upload real pictures from your phone or PC so buyers can see your item.</p>
+            </div>
+
+            <form id="postTechForm" onsubmit="handlePostSubmit(event)" class="space-y-5">
+                
+                <!-- IMAGE FILE PICKER / URL -->
+                <div class="p-5 bg-brand-50/60 border-2 border-dashed border-brand-200 rounded-2xl space-y-3">
+                    <label class="block text-xs font-bold text-gray-800 uppercase tracking-wider">
+                        <i class="fa-solid fa-image text-brand-600 mr-1"></i> Product Photo (Select File or URL)
+                    </label>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                        <div>
+                            <input type="file" id="postImageFile" accept="image/*" onchange="previewSelectedImage(event)" class="block w-full text-xs text-gray-500 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-600 file:text-white hover:file:bg-brand-700 cursor-pointer">
+                        </div>
+                        <div>
+                            <input type="url" id="postImageUrl" oninput="previewUrlImage(this.value)" placeholder="Or paste image URL..." class="w-full p-2.5 bg-white border border-gray-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-600">
+                        </div>
+                    </div>
+
+                    <!-- Image Preview Box -->
+                    <div id="imagePreviewContainer" class="hidden mt-3 relative rounded-xl overflow-hidden border border-gray-200 max-h-48">
+                        <img id="imagePreview" src="" alt="Listing Preview" class="w-full h-48 object-cover">
+                        <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-1 rounded-md font-medium">Image Preview</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Device Title</label>
+                    <input type="text" id="postTitle" required placeholder="e.g. MacBook Pro M2 or HP Victus RTX 3050" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Hardware Category</label>
+                        <select id="postCategory" required class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                            <option value="Laptops">Laptops & PCs</option>
+                            <option value="Desktops">Desktops & Workstations</option>
+                            <option value="Phones">Smartphones & Tablets</option>
+                            <option value="Accessories">Accessories & Gear</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Primary Use-Case</label>
+                        <select id="postUseCase" required class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                            <option value="Gaming">Gaming</option>
+                            <option value="Programming">Programming / Coding</option>
+                            <option value="Editing">Video & Photo Editing</option>
+                            <option value="Workspace">Workspace & Office</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Price in ETB</label>
+                        <input type="number" id="postPrice" required placeholder="e.g. 75000" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Condition</label>
+                        <select id="postCondition" required class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                            <option value="Brand New">Brand New (Sealed)</option>
+                            <option value="Slightly Used">Slightly Used (Ethiopian Hand)</option>
+                            <option value="Refurbished">Refurbished</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Sub-city / Location</label>
+                        <select id="postLocation" required class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                            <option value="Bole">Bole, Addis Ababa</option>
+                            <option value="Kazanchis">Kazanchis, Addis Ababa</option>
+                            <option value="4 Kilo">4 Kilo, Addis Ababa</option>
+                            <option value="Mexico">Mexico, Addis Ababa</option>
+                            <option value="Sarbet">Sarbet, Addis Ababa</option>
+                            <option value="Adama">Adama</option>
+                            <option value="Hawassa">Hawassa</option>
+                            <option value="Bahir Dar">Bahir Dar</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Phone Number</label>
+                        <input type="tel" id="postPhone" required placeholder="e.g. +251 911 00 00 00" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Telegram Handle (Optional)</label>
+                        <input type="text" id="postTelegram" placeholder="e.g. dani_seller" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">WhatsApp Number (Optional)</label>
+                        <input type="tel" id="postWhatsapp" placeholder="e.g. 251911000000" class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Hardware Specifications</label>
+                    <textarea id="postSpecs" rows="3" required placeholder="CPU processor, RAM size, storage type, graphics GPU, battery health, condition details..." class="w-full p-3.5 bg-neutralBg border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-600"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg transition-all duration-200">
+                    Publish Live Listing Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 py-12 mt-20">
+        <div class="max-w-[1360px] mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                        DT
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-gray-900 text-lg">DaniTech Ethiopia</span>
+                        <span class="block text-xs text-gray-500">Peer-To-Peer Tech Marketplace</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-gray-600">
+                    <a href="#" onclick="setUseCaseFilter('Gaming')" class="hover:text-brand-600 transition-colors">Gaming PCs</a>
+                    <a href="#" onclick="setUseCaseFilter('Programming')" class="hover:text-brand-600 transition-colors">Developer Laptops</a>
+                    <a href="#" onclick="setUseCaseFilter('Editing')" class="hover:text-brand-600 transition-colors">Creator Rigs</a>
+                    <a href="#" onclick="setUseCaseFilter('Workspace')" class="hover:text-brand-600 transition-colors">Office Devices</a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+                <p>&copy; 2026 DaniTech Ethiopia. Direct user listing directory.</p>
+                <div class="flex items-center gap-4">
+                    <span>Addis Ababa, Ethiopia</span>
+                    <span>&bull;</span>
+                    <span class="text-brand-600 font-semibold">ETB Currency Marketplace</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // Clean array with 0 sample default products
+        let allListings = [];
+        let currentUseCase = 'all';
+        let uploadedImageDataUrl = null;
+
+        function formatETB(amount) {
+            return new Intl.NumberFormat('en-US').format(amount) + " ETB";
+        }
+
+        // Preview local file uploaded by user
+        function previewSelectedImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageDataUrl = e.target.result;
+                    const previewImg = document.getElementById('imagePreview');
+                    const previewContainer = document.getElementById('imagePreviewContainer');
+                    previewImg.src = uploadedImageDataUrl;
+                    previewContainer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Preview external image URL typed by user
+        function previewUrlImage(url) {
+            if (url && url.trim().length > 5) {
+                uploadedImageDataUrl = url.trim();
+                const previewImg = document.getElementById('imagePreview');
+                const previewContainer = document.getElementById('imagePreviewContainer');
+                previewImg.src = uploadedImageDataUrl;
+                previewContainer.classList.remove('hidden');
+            }
+        }
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            const empty = document.getElementById('emptyState');
+            const countDisplay = document.getElementById('resultsCount');
+
+            countDisplay.textContent = items.length;
+
+            if (items.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            empty.classList.add('hidden');
+
+            grid.innerHTML = items.map(item => `
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col overflow-hidden group">
+                    <div class="img-container">
+                        <img src="${item.image}" alt="${item.title}" onerror="this.src='https://placehold.co/600x400/E53935/FFFFFF?text=${encodeURIComponent(item.title)}'">
+                        
+                        <div class="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
+                            <span class="bg-brand-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg shadow-sm">
+                                ${item.useCase}
+                            </span>
+                            <span class="bg-gray-900/80 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-lg">
+                                ${item.condition}
+                            </span>
+                        </div>
+
+                        <div class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-gray-800 text-xs font-semibold px-2.5 py-1 rounded-lg shadow-sm flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-brand-600"></i>
+                            <span>${item.location}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">${item.category}</span>
+                            <h4 class="font-extrabold text-gray-900 text-lg leading-snug group-hover:text-brand-600 transition-colors line-clamp-2">
+                                ${item.title}
+                            </h4>
+                            <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">
+                                ${item.specs}
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-gray-400 block">Price</span>
+                                <span class="text-xl font-extrabold text-brand-600">${formatETB(item.price)}</span>
+                            </div>
+
+                            <button onclick="openProductModal(${item.id})" class="px-4 py-2.5 bg-neutralBg hover:bg-brand-50 hover:text-brand-600 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-bold text-gray-700 transition-all flex items-center gap-1.5">
+                                <span>Details</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 pt-2">
+                            <a href="tel:${item.phone}" class="py-2 px-1 bg-gray-100 hover:bg-brand-600 hover:text-white text-gray-700 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors" title="Call Seller">
+                                <i class="fa-solid fa-phone"></i> Call
+                            </a>
+                            ${item.telegram ? `
+                                <a href="https://t.me/${item.telegram}" target="_blank" rel="noopener" class="py-2 px-1 bg-sky-50 hover:bg-sky-500 hover:text-white text-sky-600 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors" title="Telegram Chat">
+                                    <i class="fa-brands fa-telegram"></i> Telegram
+                                </a>
+                            ` : `<span class="py-2 px-1 bg-gray-50 text-gray-300 rounded-lg text-xs text-center">N/A</span>`}
+                            ${item.whatsapp ? `
+                                <a href="https://wa.me/${item.whatsapp}" target="_blank" rel="noopener" class="py-2 px-1 bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-600 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors" title="WhatsApp Chat">
+                                    <i class="fa-brands fa-whatsapp"></i> WA
+                                </a>
+                            ` : `<span class="py-2 px-1 bg-gray-50 text-gray-300 rounded-lg text-xs text-center">N/A</span>`}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setUseCaseFilter(useCase) {
+            currentUseCase = useCase;
+            
+            document.querySelectorAll('.usecase-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white', 'border-brand-600');
+                btn.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
+            });
+
+            const activeBtn = document.getElementById(`uc-${useCase}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
+                activeBtn.classList.add('bg-brand-600', 'text-white', 'border-brand-600');
+            }
+
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+            const category = document.getElementById('categoryFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const maxPrice = parseInt(document.getElementById('priceRange').value, 10);
+            const sortOrder = document.getElementById('sortOrder').value;
+
+            const selectedConditions = Array.from(document.querySelectorAll('.condition-checkbox:checked')).map(cb => cb.value);
+
+            let filtered = allListings.filter(item => {
+                const matchSearch = item.title.toLowerCase().includes(searchQuery) || 
+                                    item.specs.toLowerCase().includes(searchQuery) || 
+                                    item.location.toLowerCase().includes(searchQuery);
+
+                const matchCategory = category === 'all' || item.category === category;
+                const matchUseCase = currentUseCase === 'all' || item.useCase === currentUseCase;
+                const matchLocation = location === 'all' || item.location === location;
+                const matchPrice = item.price <= maxPrice;
+                const matchCondition = selectedConditions.length === 0 || selectedConditions.includes(item.condition);
+
+                return matchSearch && matchCategory && matchUseCase && matchLocation && matchPrice && matchCondition;
+            });
+
+            if (sortOrder === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortOrder === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else {
+                filtered.sort((a, b) => b.id - a.id);
+            }
+
+            renderProducts(filtered);
+            updateFilterBadges();
+        }
+
+        function updateFilterBadges() {
+            const container = document.getElementById('activeFilterBadges');
+            const badges = [];
+
+            if (currentUseCase !== 'all') badges.push(`Use-Case: ${currentUseCase}`);
+            const cat = document.getElementById('categoryFilter').value;
+            if (cat !== 'all') badges.push(`Category: ${cat}`);
+            const loc = document.getElementById('locationFilter').value;
+            if (loc !== 'all') badges.push(`Location: ${loc}`);
+
+            container.innerHTML = badges.map(b => `
+                <span class="bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold px-2.5 py-1 rounded-lg">
+                    ${b}
+                </span>
+            `).join('');
+        }
+
+        function updatePriceLabel() {
+            const val = document.getElementById('priceRange').value;
+            document.getElementById('priceDisplay').textContent = formatETB(val);
+        }
+
+        function resetAllFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = 'all';
+            document.getElementById('locationFilter').value = 'all';
+            document.getElementById('priceRange').value = '300000';
+            document.getElementById('sortOrder').value = 'newest';
+            document.querySelectorAll('.condition-checkbox').forEach(cb => cb.checked = false);
+            
+            updatePriceLabel();
+            setUseCaseFilter('all');
+        }
+
+        function openProductModal(id) {
+            const item = allListings.find(p => p.id === id);
+            if (!item) return;
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="space-y-6">
+                    <div class="img-container rounded-2xl">
+                        <img src="${item.image}" alt="${item.title}">
+                    </div>
+
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-lg">${item.useCase}</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-lg">${item.condition}</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-lg"><i class="fa-solid fa-location-dot text-brand-600"></i> ${item.location}</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-gray-900 leading-snug">${item.title}</h3>
+                        <p class="text-2xl font-extrabold text-brand-600 mt-2">${formatETB(item.price)}</p>
+                    </div>
+
+                    <div class="bg-neutralBg p-4 rounded-xl border border-gray-200 space-y-2">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500">Hardware Specifications</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">${item.specs}</p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Accepted Local Payments</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${(item.payments || ["Telebirr", "CBE"]).map(p => `
+                                <span class="bg-white border border-gray-200 text-gray-800 text-xs font-semibold px-3 py-1.5 rounded-lg shadow-sm flex items-center gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600"></i> ${p}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-6 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500">Contact Seller Directly</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <a href="tel:${item.phone}" class="py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-colors">
+                                <i class="fa-solid fa-phone"></i> ${item.phone}
+                            </a>
+                            ${item.telegram ? `
+                                <a href="https://t.me/${item.telegram}" target="_blank" rel="noopener" class="py-3 px-4 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-colors">
+                                    <i class="fa-brands fa-telegram"></i> Telegram
+                                </a>
+                            ` : ''}
+                            ${item.whatsapp ? `
+                                <a href="https://wa.me/${item.whatsapp}" target="_blank" rel="noopener" class="py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-colors">
+                                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('productModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function togglePostModal() {
+            const modal = document.getElementById('postModal');
+            modal.classList.toggle('hidden');
+            document.body.style.overflow = modal.classList.contains('hidden') ? 'auto' : 'hidden';
+        }
+
+        // Form Submit Handler
+        function handlePostSubmit(e) {
+            e.preventDefault();
+
+            // Default image placeholder if no file or URL was chosen
+            const defaultPlaceholder = "https://placehold.co/600x400/E53935/FFFFFF?text=" + encodeURIComponent(document.getElementById('postTitle').value);
+            const finalImage = uploadedImageDataUrl || defaultPlaceholder;
+
+            const newListing = {
+                id: Date.now(),
+                title: document.getElementById('postTitle').value,
+                category: document.getElementById('postCategory').value,
+                useCase: document.getElementById('postUseCase').value,
+                price: parseInt(document.getElementById('postPrice').value, 10),
+                condition: document.getElementById('postCondition').value,
+                location: document.getElementById('postLocation').value,
+                phone: document.getElementById('postPhone').value,
+                telegram: document.getElementById('postTelegram').value.replace('@', ''),
+                whatsapp: document.getElementById('postWhatsapp').value,
+                specs: document.getElementById('postSpecs').value,
+                image: finalImage,
+                payments: ["Telebirr", "CBE Bank", "Awash Bank"]
+            };
+
+            // Add listing to array
+            allListings.unshift(newListing);
+            applyFilters();
+
+            // Reset image uploaded state and form
+            uploadedImageDataUrl = null;
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('postTechForm').reset();
+            togglePostModal();
+
+            // Success Toast
+            const notification = document.createElement('div');
+            notification.className = "fixed bottom-6 right-6 bg-emerald-600 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 font-semibold text-sm transition-all transform duration-300";
+            notification.innerHTML = `<i class="fa-solid fa-circle-check text-xl"></i> Device & photo posted successfully on DaniTech!`;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        window.onload = function() {
+            applyFilters();
+        };
+    </script>
+</body>
+</html>
